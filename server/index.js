@@ -15,7 +15,7 @@ app.post("/todos", async (req, res) => {
     // get data from client side
     const { description } = req.body;
     const newTodo = await pool.query(
-      "INSERT INTO todo (description) VALUES($1) RETURNING *",
+      "INSERT INTO todo (description) VALUES($1) RETURNING *", // (description) : column
       [description]
     );
 
@@ -28,7 +28,7 @@ app.post("/todos", async (req, res) => {
 // Get all todos
 app.get("/todos", async (req, res) => {
   try {
-    const allTodos = await pool.query("Select * FROM todo");
+    const allTodos = await pool.query("SELECT * FROM todo");
     res.json(allTodos.rows);
   } catch (err) {
     console.error(err.message);
@@ -71,8 +71,8 @@ app.delete("/todos/:id", async (req, res) => {
       id,
     ]);
     res.json("todo was deleted!");
-  } catch (err){
-      console.error(err.message);
+  } catch (err) {
+    console.error(err.message);
   }
 });
 
