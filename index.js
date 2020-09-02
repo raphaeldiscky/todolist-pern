@@ -2,13 +2,25 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const pool = require("./db");
+const path = require("path");
+const PORT = process.env.PORT || 5000;
+
+// process.env.PORT
+// process.env.NODE_ENV => production or undefined
 
 // Middleware
 app.use(cors());
-app.use(express.json()); //req.body
+app.use(express.json()); // => allows us to access the req.body
+
+// show web in localhost:5000
+app.use(express.static("./client/build"));
+
+if (process.env.NODE_ENV === "production"){
+  // server static content inside build folder
+  app.use(express.static(path.join(__dirname, "client/build")));
+}
 
 // ROUTES
-
 // Create todo
 app.post("/todos", async (req, res) => {
   try {
@@ -76,6 +88,6 @@ app.delete("/todos/:id", async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
-  console.log("server has started on port 5000");
+app.listen(PORT, () => {
+  console.log(`server has started on port ${PORT}`);
 });
