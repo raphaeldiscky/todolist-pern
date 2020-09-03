@@ -1,1 +1,1 @@
-Build a full stack to do list web application 
+Build a full stack to do list web application with PERN stack
