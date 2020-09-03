@@ -7,7 +7,10 @@ const InputTodo = () => {
     e.preventDefault();
     try {
       const body = { description };
-      const response = await fetch("http://localhost:5000/todos", { // fetch request
+      // proxy is only use in development so it will be ignored in production
+      // so if there is no http://localhost:5000 then by default it is going to use heroku domain
+      // remember this heroku app is just our server serving the build static content and  also holding the resful api
+      const response = await fetch("/todos", { // fetch request
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),

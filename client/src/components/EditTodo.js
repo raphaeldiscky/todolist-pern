@@ -9,8 +9,9 @@ const EditTodo = ({ todo }) => {
     e.preventDefault(); // stopping the refresh page
     try {
       const body = { description };
+      // use proxy => shorten our url and help us in production using heroku domain
       const response = await fetch(
-        `http://localhost:5000/todos/${todo.todo_id}`,
+        `/todos/${todo.todo_id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
