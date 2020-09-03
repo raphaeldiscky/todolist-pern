@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Build a full stack to do list web application",
   "main": "index.js",
+  "engines": {
+    "node": "12.18.2",
+    "npm": "6.14.5"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

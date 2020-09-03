@@ -15,7 +15,7 @@ app.use(express.json()); // => allows us to access the req.body
 // show react app in localhost:5000
 // app.use(express.static("./client/build"));
 
-if (process.env.NODE_ENV === "production"){
+if (process.env.NODE_ENV === "production") {
   // server static content inside build folder
   app.use(express.static(path.join(__dirname, "client/build")));
 }
@@ -86,6 +86,11 @@ app.delete("/todos/:id", async (req, res) => {
   } catch (err) {
     console.error(err.message);
   }
+});
+
+// catchall method
+app.get("*", (req, res) => {
+  res.sendfile(path.join(__dirname, "client/build/index.html"));
 });
 
 app.listen(PORT, () => {
